@@ -1,0 +1,42 @@
+1) Constructor: params of constructor method are correctly applied to fields -- can't check, since the fields are private and there are no getter method
+
+2) Method checkTriangle()
+ + if 1 side = 0 returns false (3 times for each side)
+ + if 2 sides = 0 returns false (3 combinations)
+ + if 3 sides = 0 returns false
+ + if 1 side is less then 0 returns false (3 times for each side)
+ + if 2 sides are less then 0 returns false (3 combinations)
+ + if 3 sides are less then 0 returns false
+ + if 1 side = 0 and 1 side is less then 0 returns false (3 times for each side)
+ + if 1 side = 0 and 2 sides are less then 0 returns false (3 combinations)
+ + if 2 sides = 0 and 1 side is less then 0 returns false (3 combinations)
+ + if 3 sides !=0 and more then O returns true
+ + if a+b<c returns false
+ + if a+c<b returns false
+ + if c+b<a returns false
+
+3) Method detectTriangle()
+ + if a != b != c returns TR_ORDINARY
+ + if a != b != c (a = 0) does not return TR_ORDINARY (3 times for each side)
+ + if a != b != c (a < 0) does not return TR_ORDINARY (3 times for each side)
+
+ + if a = b != c returns TR_ISOSCELES (3 combinations)
+ + if a = b != c (c = 0) does not return TR_ISOSCELES (3 combinations)
+ + if a = b != c (a = b = 0) does not return TR_ISOSCELES (3 combinations)
+ + if a = b != c (c < 0) does not return TR_ISOSCELES (3 combinations)
+ + if a = b != c (a < 0, b < 0)does not return TR_ISOSCELES (3 combinations)
+
+ + if a = b = c returns TR_EQUILATERAL
+ + if a = b = c = 0 does not return TR_EQUILATERAL
+ + if a = b = c < 0 does not return TR_EQUILATERAL
+
+ + if a^2 + b^2 = c^2 returns TR_RECTANGULAR (3 combinations)
+ + if a^2 + b^2 = c^2 (a = 0) does not return TR_RECTANGULAR (3 combinations)
+ + if a^2 + b^2 = c^2 (b < 0) does not return TR_RECTANGULAR (3 combinations)
+ + if a^2 + b^2 = c^2 (a = b = c = 0) does not return TR_RECTANGULAR
+ + if a^2 + b^2 = c^2 (a < 0, b < 0) does not return TR_RECTANGULAR (3 combinations)
+ + if a^2 + b^2 = c^2 (a < 0, b < 0, c < 0) does not return TR_RECTANGULAR (3 combinations)
+
+ 4) Method getSquare()
+ + square is calculated correctly
+ - square can not be calculated for values less then 0 or equal to 0
