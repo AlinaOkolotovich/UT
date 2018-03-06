@@ -1,4 +1,4 @@
-import Triangle.src.triangle.Triangle;
+import Triangle.triangle.Triangle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

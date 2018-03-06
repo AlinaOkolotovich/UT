@@ -1,4 +1,3 @@
-import Triangle.src.triangle.Triangle;
 import org.testng.annotations.Test;
 
 import java.util.Random;

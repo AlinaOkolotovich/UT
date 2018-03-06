@@ -1,4 +1,4 @@
-import Triangle.src.triangle.Triangle;
+import Triangle.triangle.Triangle;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

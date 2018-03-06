@@ -1,5 +1,5 @@
-package Triangle.src.runner;
-import Triangle.src.triangle.Triangle;
+package Triangle.runner;
+import Triangle.triangle.Triangle;
 
 public class Main {
 

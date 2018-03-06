@@ -1,4 +1,4 @@
-package Triangle.src.triangle;
+package Triangle.triangle;
 
 public class Triangle {
 
