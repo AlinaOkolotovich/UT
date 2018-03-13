@@ -39,4 +39,5 @@
 
  4) Method getSquare()
  + square is calculated correctly
- - square can not be calculated for values less then 0 or equal to 0
+ + square can not be calculated for values less then 0 or equal to 0 (troughs exception)
+ + square can not be calculated for 3 values that do not form a triangle (troughs exception)
