@@ -93,14 +93,18 @@ public class Utils {
             double a = generateRandomDouble(0, 100);
             tr = new Triangle(a, b, c);
         } else if (condition.equals("a=b<0")|condition.equals("b=a<0")) {
-            double a = 0;
+            double a = generateRandomDouble(-100,0);
             double b = a;
             double c = generateRandomDouble(0, 100);
             tr = new Triangle(a, b, c);
         } else if (condition.equals("a=c<0")|condition.equals("c=a<0")) {
-            double a = 0;
-            double b = a;
-            double c = generateRandomDouble(0, 100);
+            double a = generateRandomDouble(-100,0);;
+            double c = a;
+            double b = generateRandomDouble(0, 100);
+        } else if (condition.equals("b=c<0")|condition.equals("b=a<0")) {
+            double b = generateRandomDouble(-100,0);;
+            double c = b;
+            double a = generateRandomDouble(0, 100);
         } else if (condition.equals("a=b, c=0")|condition.equals("b=a, c=0")) {
             double a = generateRandomDouble(0, 100);
             double b = a;

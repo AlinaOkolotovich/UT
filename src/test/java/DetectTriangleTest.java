@@ -2,7 +2,6 @@ import Triangle.triangle.Triangle;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
@@ -39,6 +38,9 @@ public class DetectTriangleTest {
                 {ut.generateThreeSides("a=b, c=0"), "a=b, c=0", 2, false},
                 {ut.generateThreeSides("a=c, b=0"), "a=c, b=0", 2, false},
                 {ut.generateThreeSides("c=b, a=0"), "c=b, a=0", 2, false},
+                {ut.generateThreeSides("a=b<0"), "a=b<0", 2, false},
+                {ut.generateThreeSides("a=<0"), "a=c<0", 2, false},
+                {ut.generateThreeSides("c=b<0"), "c=b<0", 2, false},
         };
     }
 
