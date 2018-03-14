@@ -1,5 +1,6 @@
 import Triangle.triangle.Triangle;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -10,120 +11,53 @@ import static org.testng.Assert.assertNotEquals;
  */
 public class DetectTriangleTest {
     Utils ut = new Utils();
-
-    @Test
-    public void correctOrdinaryTriangleCheck() {
-        //a != b != c, all sides are more than 0
-        Triangle tr = new Triangle(
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100)
-        );
-        assertEquals(4, tr.detectTriangle());
+    @DataProvider(name = "Ordinary triangles")
+    public static Object [][] triangleSides(){
+        Utils ut = new Utils();
+        return new Object[][]{
+                {ut.generateThreeSides("a+b>c"), "a+b>c", 4, true},
+                {ut.generateThreeSides("a+c>b"), "a+b>c", 4, true},
+                {ut.generateThreeSides("c+b>a"), "c+b>a", 4, true},
+                {ut.generateThreeSides("a!=b!=c!, a=0"), "a!=b!=c!, a=0", 4, false},
+                {ut.generateThreeSides("a!=b!=c!, b=0"), "a!=b!=c!, b=0", 4, false},
+                {ut.generateThreeSides("a!=b!=c!, c=0"), "a!=b!=c!, c=0", 4, false},
+                {ut.generateThreeSides("a!=b!=c!, a<0"), "a!=b!=c!, a<0", 4, false},
+                {ut.generateThreeSides("a!=b!=c!, b<0"), "a!=b!=c!, b<0", 4, false},
+                {ut.generateThreeSides("a!=b!=c!, c<0"), "a!=b!=c!, c<0", 4, false},
+        };
+    }
+    @DataProvider(name = "Isosceles triangles")
+    public static Object [][] isoscelesriangleSides(){
+        Utils ut = new Utils();
+        return new Object[][]{
+                {ut.generateThreeSides("a=b"), "a=b", 2, true},
+                {ut.generateThreeSides("a=c"), "a=c", 2, true},
+                {ut.generateThreeSides("b=c"), "b=c", 2, true},
+                {ut.generateThreeSides("a=b=0"), "a=b=0", 2, false},
+                {ut.generateThreeSides("a=c=0"), "a=c=0", 2, false},
+                {ut.generateThreeSides("b=c=0"), "b=c=0", 2, false},
+                {ut.generateThreeSides("a=b, c=0"), "a=b, c=0", 2, false},
+                {ut.generateThreeSides("a=c, b=0"), "a=c, b=0", 2, false},
+                {ut.generateThreeSides("c=b, a=0"), "c=b, a=0", 2, false},
+        };
     }
 
-    @Test
-    public void notOrdinaryTriangleIfAIsNegative() {
-        // a < 0, b >= 0, c >= 0
-        createTriangleAndDetect(
-                ut.generateRandomDouble(-100, 0),
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100),
-                4,
-                false
-        );
+    @Test(dataProvider = "Ordinary triangles" )
+    public void ordinaryTriangleCheck(Triangle tr, String condition, int triangleType, boolean isExpected) {
+        if (isExpected == true) {
+            assertEquals(triangleType, tr.detectTriangle());
+        } else {
+            Assert.assertNotEquals(triangleType, tr.detectTriangle());
+        }
     }
 
-    @Test
-    public void notOrdinaryTriangleIfBIsNegative() {
-        // b < 0, c >= 0, a >= 0
-        createTriangleAndDetect(
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(-100, 0),
-                ut.generateRandomDouble(0, 100),
-                4,
-                false
-        );
-    }
-
-    @Test
-    public void notOrdinaryTriangleIfCIsNegative() {
-        // c < 0, a >= 0, b >= 0
-        createTriangleAndDetect(
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(-100, 0),
-                4,
-                false
-        );
-    }
-
-    @Test
-    public void notOrdinaryTriangleIfAIsZero() {
-        // a = 0, b >= 0, c >= 0
-        createTriangleAndDetect(
-                0,
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100),
-                4,
-                false
-        );
-    }
-
-    @Test
-    public void notOrdinaryTriangleIfBIsZero() {
-        // b = 0, a >= 0, c >= 0
-        createTriangleAndDetect(
-                ut.generateRandomDouble(0, 100),
-                0,
-                ut.generateRandomDouble(0, 100),
-                4,
-                false
-        );
-    }
-
-    @Test
-    public void notOrdinaryTriangleIfCIsZero() {
-        // c = 0, b >= 0, a >= 0
-        createTriangleAndDetect(
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100),
-                0,
-                4,
-                false
-        );
-    }
-
-    @Test
-    public void correctIsoscelesTriangle() {
-        createIsoscelesTriangleAndDetect(
-                ut.generateRandomDouble(0, 100),
-                ut.generateRandomDouble(0, 100),
-                2,
-                true
-        );
-    }
-
-    @Test
-    public void notIsoscelesTriangleIfSideIsZero() {
-        createIsoscelesTriangleAndDetect(
-                ut.generateRandomDouble(0, 100),
-                0,
-                2,
-                10,
-                false
-        );
-    }
-
-    @Test
-    public void notIsoscelesTriangleIfTwoSidesAreZeros() {
-        createIsoscelesTriangleAndDetect(
-                0,
-                ut.generateRandomDouble(0, 100),
-                2,
-                10,
-                false
-        );
+    @Test(dataProvider = "Isosceles triangles")
+    public void correctIsoscelesTriangle(Triangle tr, String condition, int triangleType, boolean isExpected) {
+        if (isExpected == true) {
+            assertEquals(triangleType, tr.detectTriangle());
+        } else {
+            Assert.assertNotEquals(triangleType, tr.detectTriangle());
+        }
     }
 
     @Test
